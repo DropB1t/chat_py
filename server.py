@@ -6,7 +6,7 @@ import time
 clients = []
 
 #Set the connection variables
-ip = socket.gethostbyname_ex(socket.gethostname())[2][1]
+ip = socket.gethostbyname_ex(socket.gethostname())[2][0]
 port = 1234
 
 #Server object
@@ -32,7 +32,6 @@ def serviClient(client_socket):
     while True:
         message = client_socket.recv(100)
         if message == 'exit()':
-            clients.remove(client_socket)
             broadcast(r"<< %s left the chat room! >>" % (name))
             #print("<< %s left the chat room! >>" % (name))
             break
