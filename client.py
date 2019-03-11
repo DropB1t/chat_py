@@ -14,7 +14,10 @@ def newName():
 
 def chatThread(client_socket):
 	while True:
-		message = client_socket.recv(100)
+		try:
+			message = client_socket.recv(100)
+		except:
+			break
 		print(message)
 
 
