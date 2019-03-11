@@ -19,8 +19,8 @@ def chatThread(client_socket):
 
 
 #Set the connection variables
-ip = '192.168.1.3'
-#ip = raw_input("Enter the server ip--> ")
+#ip = '192.168.1.3'
+ip = raw_input("Enter the server ip--> ")
 port = 1234
 
 #Create socket object
