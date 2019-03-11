@@ -22,7 +22,7 @@ print("Server is running...")
 #Send message to all clients except the sender
 def broadcast(message):
     for client in clients:
-        client.send(message)
+        client.sendall(message)
 
 #Manage of data that comes to the server
 def serviClient(client_socket):
