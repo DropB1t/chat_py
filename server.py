@@ -32,6 +32,7 @@ def serviClient(client_socket):
     while True:
         message = client_socket.recv(100)
         if message == 'exit()':
+            clients.remove(client_socket)
             broadcast(r"<< %s left the chat room! >>" % (name))
             #print("<< %s left the chat room! >>" % (name))
             break
@@ -46,5 +47,4 @@ while True:
     client_socket,client_ip = server_socket.accept()
     if client_socket:
         clients.append(client_socket)
-        print(clients)
         Thread(target = serviClient, args = (client_socket,)).start()
