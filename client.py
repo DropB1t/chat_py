@@ -31,6 +31,7 @@ client_socket.connect( (ip,port) )
 client_socket.sendall(newName())
 
 clear()
+print("Write 'exit()' to quit the chat")
 #Start receiving data from server (Other clients)
 Thread(target = chatThread, args = (client_socket,)).start()
 
