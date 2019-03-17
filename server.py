@@ -35,23 +35,23 @@ print("Server is running...")
 #Send message to all clients except the sender
 def broadcast(message):
     for client in clients:
-        client.sendall(message)
+        client.sendall(message.encode('utf-8'))
 
 #Manage of data that comes to the server
 def serviClient(client_socket):
-    name = client_socket.recv(100)
-    broadcast(r"<< %s entered the chat room! >>" % (name))
-    #print("<< %s entered the chat room! >>" % (name))
+    name = client_socket.recv(100).decode('utf_8')
+    broadcast("<< %s entered the chat room! >>" % (name))
+    print("<< %s entered the chat room! >>" % (name))
     while True:
-        message = client_socket.recv(100)
+        message = client_socket.recv(100).decode('utf_8')
         if message == 'exit()':
             clients.remove(client_socket)
-            broadcast(r"<< %s left the chat room! >>" % (name))
-            #print("<< %s left the chat room! >>" % (name))
+            broadcast("<< %s left the chat room! >>" % (name))
+            print("<< %s left the chat room! >>" % (name))
             break
         else:
-            broadcast(r"%s: %s" % (name, message))
-            #print("%s: %s" % (name, message))
+            broadcast("%s: %s" % (name, message))
+            print("%s: %s" % (name, message))
     time.sleep(1)
     client_socket.close()
 

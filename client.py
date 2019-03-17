@@ -9,13 +9,13 @@ def clear():
 	os.system('cls' if os.name == 'nt' else 'clear')
 
 def newName():
-	name = raw_input('Please enter your name--> ')
-	return name
+	name = input('Please enter your name--> ')
+	return name.encode('utf-8')
 
 def chatThread(client_socket):
 	while True:
 		try:
-			message = client_socket.recv(100)
+			message = client_socket.recv(100).decode('utf_8')
 		except:
 			break
 		print(message)
@@ -23,14 +23,18 @@ def chatThread(client_socket):
 
 #Set the connection variables
 #ip = '192.168.1.3'
-ip = raw_input("Enter the server ip--> ")
+ip = input("Enter the server ip--> ")
 port = 1234
 
 #Create socket object
 client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
 #Connect to the server
-client_socket.connect( (ip,port) )
+try:
+	client_socket.connect( (ip,port) )
+except:
+	print("Impossible to establish the connection!")
+
 client_socket.sendall(newName())
 
 clear()
@@ -40,10 +44,10 @@ Thread(target = chatThread, args = (client_socket,)).start()
 
 #Send the data to the server
 while True:
-	message = raw_input()
+	message = input()
 	sys.stdout.write('\x1b[1A') #CURSOR_UP_ONE
 	sys.stdout.write('\x1b[2K') #ERASE_LINE
-	client_socket.sendall(message)
+	client_socket.sendall(message.encode('utf-8'))
 	if message == 'exit()':
 		client_socket.close()
 		break
