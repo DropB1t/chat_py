@@ -59,7 +59,7 @@ class StartPage(tk.Frame):
                 controller.show_frame("ChatBox")
                 pass
             except:
-                err.set("Impossible to establish the connection!")
+                err.set("Connection cannot be established!")
 
 
         label1 = Label(self, text="Enter Server Ip & Port:",bg="#121113", fg="#EDECEF").pack(side="top", pady = 10)
@@ -104,9 +104,9 @@ class ChatBox(tk.Frame):
 
         def send_message(event):
             message = input_field.get()
-            if message != '':
+            if message != '' and message != 'exit()':
                 self.client_socket.sendall(message.encode('utf-8'))
-                input_user.set('')
+            input_user.set('')
             return "break"
 
         button = tk.Button(self, text="Disconnect", bg="#46434C", fg="#EDECEF",
@@ -128,11 +128,12 @@ class ChatBox(tk.Frame):
         while True:
             try:
                 message = self.client_socket.recv(100).decode('utf_8')
+                self.messages.configure(state='normal')
+                self.messages.insert(INSERT, '%s\n' % message)
+                self.messages.configure(state='disabled')
             except:
                 break
-            self.messages.configure(state='normal')
-            self.messages.insert(INSERT, '%s\n' % message)
-            self.messages.configure(state='disabled')
+
 
     def update_socket(self, socket):
         self.client_socket = socket.get_socket()
