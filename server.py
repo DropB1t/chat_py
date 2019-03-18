@@ -29,7 +29,7 @@ server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 server_socket.bind( (ip,port) )
 
 #Accept packets
-server_socket.listen(25)
+server_socket.listen(5)
 print("Server %s is running on port %s..." % (ip,str(port)))
 
 #Send message to all clients except the sender
