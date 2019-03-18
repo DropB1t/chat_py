@@ -33,7 +33,7 @@ client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 try:
 	client_socket.connect( (ip,port) )
 except:
-	print("Impossible to establish the connection!")
+	print("Connection cannot be established!")
 
 client_socket.sendall(newName())
 
