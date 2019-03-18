@@ -30,7 +30,7 @@ server_socket.bind( (ip,port) )
 
 #Accept packets
 server_socket.listen(25)
-print("Server is running...")
+print("Server %s is running on port %s..." % (ip,str(port)))
 
 #Send message to all clients except the sender
 def broadcast(message):
